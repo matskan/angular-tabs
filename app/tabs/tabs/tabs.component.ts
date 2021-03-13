@@ -4,7 +4,9 @@ import {
   AfterContentInit,
   ContentChildren,
   QueryList,
-  Input
+  Input,
+  ViewChild,
+  ElementRef
 } from "@angular/core";
 import { TabComponent } from "../tab/tab.component";
 import { TabsService } from "../tabs.service";
@@ -25,6 +27,9 @@ export class TabsComponent implements AfterContentInit {
     TabComponent
   >;
 
+  @ViewChild("toolbar", { read: ElementRef, static: false })
+  toolbar: ElementRef;
+
   ngAfterContentInit() {
     this.activeTab = this.defaultIndex;
   }
@@ -35,7 +40,6 @@ export class TabsComponent implements AfterContentInit {
 
   get content() {
     const value = this.items.filter(item => item.key === this.activeTab);
-    console.log("content");
     return value[0].body.template;
   }
 
@@ -60,6 +64,20 @@ export class TabsComponent implements AfterContentInit {
     this.service.remove(tab.key);
     if (tab.key === this.activeTab) {
       this.activeTab = this.service.first;
+    }
+  }
+
+  onScroll(event: WheelEvent) {
+    const { scrollWidth, clientWidth } = this.toolbar.nativeElement;
+    if (scrollWidth === clientWidth) {
+      return;
+    }
+
+    console.log("wheel", scrollWidth, clientWidth);
+    if (event.deltaY > 0) {
+      this.toolbar.nativeElement.scrollLeft += 15;
+    } else {
+      this.toolbar.nativeElement.scrollLeft += -15;
     }
   }
 }

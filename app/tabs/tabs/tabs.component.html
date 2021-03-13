@@ -1,7 +1,14 @@
-<div class="toolbar">
-  <div class="tab" *ngFor="let tab of tabs" (click)="setActive(tab)" [class.active]="isActive(tab)">
-    <ng-container *ngTemplateOutlet="getTitle(tab)"></ng-container>
-    <button (click)="closeTab(tab)">x</button>
+<div #toolbar class="toolbar" (mousewheel)="onScroll($event)">
+  <div
+    class="tab"
+    *ngFor="let tab of tabs"
+    (click)="setActive(tab)"
+    [class.active]="isActive(tab)"
+  >
+    <div class="title">
+      <ng-container *ngTemplateOutlet="getTitle(tab)"></ng-container>
+    </div>
+    <div><button (click)="closeTab(tab)">x</button></div>
   </div>
   <button (click)="createTab()">+</button>
 </div>
