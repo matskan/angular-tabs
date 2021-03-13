@@ -20,4 +20,9 @@ export class AppComponent {
   get tabs() {
     return this.service.tabs;
   }
+
+  get defaultIndex() {
+    const index = this.service.first;
+    return index == -1 ? 1 : index;
+  }
 }

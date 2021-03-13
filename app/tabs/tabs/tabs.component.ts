@@ -73,7 +73,6 @@ export class TabsComponent implements AfterContentInit {
       return;
     }
 
-    console.log("wheel", scrollWidth, clientWidth);
     if (event.deltaY > 0) {
       this.toolbar.nativeElement.scrollLeft += 15;
     } else {

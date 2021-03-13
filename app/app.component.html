@@ -7,11 +7,9 @@
 
 <br> -->
 
-<tabs [defaultIndex]="tabs[0]">
+<tabs [defaultIndex]="defaultIndex">
   <tab *ngFor="let tab of tabs" [key]="tab">
-    <tab-title>
-      Tab <b>{{ tab }}</b> title
-    </tab-title>
+    <tab-title> Tab <b>{{ tab }}</b> title </tab-title>
     <tab-content>
       Tab <b>{{ tab }}</b> content
       <test [tab]="tab"></test>
