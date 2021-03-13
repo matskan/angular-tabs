@@ -1,0 +1,10 @@
+<div class="toolbar">
+  <div class="tab" *ngFor="let tab of tabs" (click)="setActive(tab)" [class.active]="isActive(tab)">
+    <ng-container *ngTemplateOutlet="getTitle(tab)"></ng-container>
+    <button (click)="closeTab(tab)">x</button>
+  </div>
+  <button (click)="createTab()">+</button>
+</div>
+<div *ngIf="activeTab !== -1" class="content">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</div>
