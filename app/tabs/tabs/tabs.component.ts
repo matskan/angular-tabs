@@ -35,6 +35,7 @@ export class TabsComponent implements AfterContentInit {
 
   get content() {
     const value = this.items.filter(item => item.key === this.activeTab);
+    console.log("content");
     return value[0].body.template;
   }
 
@@ -56,9 +57,9 @@ export class TabsComponent implements AfterContentInit {
   }
 
   closeTab(tab: TabComponent) {
-    if (tab.key === this.activeTab) {
-      this.activeTab = this.tabs[0]?.key ?? -1;
-    }
     this.service.remove(tab.key);
+    if (tab.key === this.activeTab) {
+      this.activeTab = this.service.first;
+    }
   }
 }

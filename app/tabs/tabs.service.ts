@@ -10,9 +10,9 @@ export class TabsService {
   }
 
   public inc() {
-    const insert = Math.max(...this.tabs) + 1;
-    this.tabs = [...this.tabs, insert];
-    return insert;
+    const max = this.tabs.length ? Math.max(...this.tabs) : 0;
+    this.tabs = [...this.tabs, max + 1];
+    return max + 1;
   }
 
   public remove(value: number) {
@@ -20,5 +20,9 @@ export class TabsService {
     if (index !== -1) {
       this.tabs = [...this.tabs.slice(0, index), ...this.tabs.slice(index + 1)];
     }
+  }
+
+  public get first() {
+    return this.tabs.length ? this.tabs[0] : -1;
   }
 }
